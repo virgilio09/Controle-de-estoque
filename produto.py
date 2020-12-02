@@ -45,13 +45,3 @@ class Produto:
 	@data_validade.setter
 	def data_validade(self, data_validade):
 		self._data_validade = data_validade
-
-	
-		
-
-	
-	
-
-	
-		
-		
