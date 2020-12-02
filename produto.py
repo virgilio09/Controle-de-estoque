@@ -29,7 +29,7 @@ class Produto:
 		return self._valor
 
 	@valor.setter
-	def valor(self):
+	def valor(self, valor):
 		if(valor >= 0):
 			self._valor = valor
 		
