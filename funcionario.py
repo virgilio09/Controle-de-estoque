@@ -1,7 +1,10 @@
-class Funcionario(object):
+
+from pessoa import Pessoa
+
+class Funcionario(Pessoa):
 	
 	def __init__(self, pessoa):
-		self._info = pessoa
+		super().__init__()
 		self._setor = None
 
 	@property
