@@ -16,8 +16,8 @@ class Estoque:
 
 		produto.codigo = input("Codigo: ")
 		produto.nome = input("Nome: ")
-		produto.valor = float(input("valor: "))
-		Produto.data_validade = input("Data de validade: ")
+		produto.valor = float(input("Valor: "))
+		Produto.quantidade = input("Quantidade: ")
 	
 		self._lista_produtos.append (produto)
 
@@ -30,7 +30,7 @@ class Estoque:
 				print("Código: {}".format(produto.codigo))
 				print("Nome: {}".format(produto.nome))
 				print("Valor: {0:4.2f}".format(produto.valor))
-				print("Data de validade: {}\n".format(produto.data_validade))
+				print("Quantidade: {}\n".format(produto.quantidade))
 		else:
 			print("O Estoque está vaziu")
 
