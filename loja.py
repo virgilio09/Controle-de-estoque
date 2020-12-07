@@ -7,7 +7,7 @@ class Loja():
 	def __init__(self):
 		self._nome = None
 		self._list_funcionarios = []
-		self._list_clietes = []
+		self._list_clientes = []
 		self._estoque = Estoque()
 
 	@property
@@ -37,11 +37,16 @@ class Loja():
 		cliente = Cliente()
 		cliente.nome = input("Nome: ")
 		cliente.cpf = input("CPF: ")
-		self._list_clietes.append(cliente)
+		self._list_clientes.append(cliente)
 
 	def buscar_funcionario(self):
 		cpf = input("Digite seu cpf: ")
 		resultado = [func for func in self._list_funcionarios if func.cpf == cpf]
+		return resultado
+	
+	def buscar_cliente(self):
+		cpf = input("Digite seu cpf: ")
+		resultado = [cliente for cliente in self._list_clientes if cliente.cpf == cpf]
 		return resultado
 	
 	def analise_compras(self, Cliente):
