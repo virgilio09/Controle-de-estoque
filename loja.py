@@ -8,7 +8,7 @@ class Loja():
 		self._nome = None
 		self._list_funcionarios = []
 		self._list_clietes = []
-		self.estoque = Estoque()
+		self._estoque = Estoque()
 
 	@property
 	def nome(self):
@@ -16,9 +16,16 @@ class Loja():
 
 	@nome.setter
 	def nome(self, nome):
-		self._nome = nome
+		self.nome = nome
 
+	@property
+	def estoque(self):
+		return self._estoque
 
+	@estoque.setter
+	def estoque(self, estoque):
+		self._estoque = estoque
+	
 	def cadastra_func(self):
 		func = Funcionario()
 		func.nome = input("Nome: ")
@@ -59,5 +66,3 @@ class Loja():
 				print("{}	{}		{}".format(produto.codigo, produto.nome, produto.valor))
 
 			Cliente.total_carrinho()
-
-

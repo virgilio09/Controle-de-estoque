@@ -32,7 +32,7 @@ class Estoque:
 				print("Valor: {0:4.2f}".format(produto.valor))
 				print("Data de validade: {}\n".format(produto.data_validade))
 		else:
-			print("O Estoque está vaziu\n")
+			print("O Estoque está vaziu")
 
 
 	
