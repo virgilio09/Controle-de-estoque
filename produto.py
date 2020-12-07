@@ -4,7 +4,7 @@ class Produto:
 		self._codigo = 0
 		self._nome = None
 		self._valor = 0
-		self._data_validade = None
+		self._quantidade = 0
 
 
 	@property
@@ -38,10 +38,10 @@ class Produto:
 
 
 	@property
-	def data_validade(self):
-		return self._data_validade
+	def quantidade(self):
+		return self._quantidade
 
 	
-	@data_validade.setter
-	def data_validade(self, data_validade):
-		self._data_validade = data_validade
+	@quantidade.setter
+	def quantidade(self, quantidade):
+		self._quantidade = quantidade
