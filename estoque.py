@@ -5,12 +5,10 @@ class Estoque:
 	def __init__(self):
 		self._lista_produtos = []
 
-
 	@property
 	def lista_produtos(self):
 		return self._lista_produtos
 	
-
 
 	def cadastrar_produto(self):
 		
@@ -24,11 +22,11 @@ class Estoque:
 		self._lista_produtos.append (produto)
 
 
-	def mostrar_produtos(self, lista_produtos):
+	def mostrar_produtos(self):
 
-		if(lista_produtos != []):
+		if(self._lista_produtos != []):
 			print("--- Lista de Produtos ----\n")
-			for produto in lista_produtos:
+			for produto in self._lista_produtos:
 				print("Código: {}".format(produto.codigo))
 				print("Nome: {}".format(produto.nome))
 				print("Valor: {0:4.2f}".format(produto.valor))
