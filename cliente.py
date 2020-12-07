@@ -57,12 +57,12 @@ class Cliente(Pessoa):
 
 		if(self._carrinho != []):
 
-			total = 0;
+			total = 0
 
-			for produto in self_carrinho:
+			for produto in self._carrinho:
 				total += produto.valor
 
 			print("Total = {0:4.2f}".format(total))
 
 		else:
-			print("O carrinho está vaziu")
+			print("O carrinho está vazio")
