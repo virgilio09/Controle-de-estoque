@@ -17,7 +17,7 @@ class Estoque:
 		produto.codigo = input("Codigo: ")
 		produto.nome = input("Nome: ")
 		produto.valor = float(input("Valor: "))
-		Produto.quantidade = input("Quantidade: ")
+		Produto.quantidade = int(input("Quantidade: "))
 	
 		self._lista_produtos.append (produto)
 
