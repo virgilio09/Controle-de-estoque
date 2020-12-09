@@ -32,7 +32,7 @@ class Estoque:
 				print("Valor: {0:4.2f}".format(produto.valor))
 				print("Quantidade: {}\n".format(produto.quantidade))
 		else:
-			print("O Estoque está vaziu")
+			print("O Estoque está vazio")
 
 
 	
