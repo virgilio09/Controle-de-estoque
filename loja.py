@@ -9,6 +9,7 @@ class Loja():
 		self._list_funcionarios = []
 		self._list_clientes = []
 		self._estoque = Estoque()
+		self._cliente = Cliente()
 
 	@property
 	def nome(self):
@@ -25,7 +26,15 @@ class Loja():
 	@estoque.setter
 	def estoque(self, estoque):
 		self._estoque = estoque
+
+	@property
+	def cliente(self):
+		return self._cliente
 	
+	@cliente.setter
+	def cliente(self, cliente):
+		self._cliente = cliente
+
 	def cadastra_func(self):
 		func = Funcionario()
 		func.nome = input("Nome: ")
@@ -34,10 +43,9 @@ class Loja():
 		self._list_funcionarios.append(func)
 
 	def cadastra_cliente(self):
-		cliente = Cliente()
-		cliente.nome = input("Nome: ")
-		cliente.cpf = input("CPF: ")
-		self._list_clientes.append(cliente)
+		self._cliente.nome = input("Nome: ")
+		self._cliente.cpf = input("CPF: ")
+		self._list_clientes.append(self._cliente)
 
 	def buscar_funcionario(self):
 		cpf = input("Digite seu cpf: ")
@@ -94,7 +102,7 @@ class Loja():
 	def analise_compras(self, Cliente):
 		
 		
-		if(Cliente.carrinho != []):
+		if(Cliente._carrinho.lista_produtos != []):
 			self.cupom_fiscal(Cliente)
 			op = input("\nDeseja aprovar esta compra?(S/N)").lower()
 			if(op == 's'):
@@ -105,13 +113,18 @@ class Loja():
 					print("\nCpf incorreto!\n")
 			else:
 				print("Compra cancelada!")
-		
+				
+
+	def devolve_estoque(self,Cliente, Estoque):
+		for produto in Cliente._carrinho._lista_produtos:
+			Estoque.lista_produtos[produto].quantidade += produto.quantidade 
+
 
 	def cupom_fiscal(self, Cliente):
 	
-		if(Cliente.carrinho != []):
+		if(Cliente._carrinho._lista_produtos != []):
 			print("---- Cupom fiscal ----")
-			for produto in Cliente.carrinho:
+			for produto in Cliente.carrinho.lista_produtos:
 				print("Código	Produto		Valor unit.\n")
 				print("{}	{}		{}".format(produto.codigo, produto.nome, produto.valor))
 
