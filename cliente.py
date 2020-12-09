@@ -1,5 +1,6 @@
 from pessoa import Pessoa
 from estoque import Estoque
+from carrinho import Carrinho
 
 class Cliente(Pessoa): 
 	
@@ -7,7 +8,7 @@ class Cliente(Pessoa):
 
 	def __init__(self):
 		super().__init__()
-		self._carrinho = []
+		self._carrinho = Carrinho()
 		Cliente._qtd_clientes += 1
 
 	@staticmethod
@@ -19,6 +20,11 @@ class Cliente(Pessoa):
 	def carrinho(self):
 		return self._carrinho
 
+	@carrinho.setter
+	def carrinho(self, carrinho):
+		self._carrinho = carrinho
+
+
 	# adicionar ao carrinho
 	def add_produto(self,Estoque):
 		
@@ -26,7 +32,11 @@ class Cliente(Pessoa):
 		adicionou = False  
 		
 		if(produto != []):
-			self._carrinho.append(produto[0])
+			qtd = input("Quantidade do produto que deseja adiconar: ")
+			quant = int(qtd)
+			produto[0].quantidade -= quant
+			self._carrinho._lista_produtos.append(produto[0])
+			self._carrinho.quantidade.append(quant)
 			print("Produto adicionado com sucesso!")
 			adicionou = True
 		else:
@@ -39,11 +49,14 @@ class Cliente(Pessoa):
 		
 		codigo = input("Codigo do produto: ")
 
-		if(self._carrinho != []):
+		if(self._carrinho.lista_produtos != []):
 
-			for produto in self._carrinho:
+			for produto in self._carrinho.lista_produtos:
 				if(produto.codigo == codigo):
-					self._carrinho.remove(produto)
+					indice = self._carrinho.lista_produtos.index(produto)
+					self._carrinho.lista_produtos.remove(produto)
+					del(self._carrinho.quantidade[indice])
+					
 					print("Produto removido com sucesso!")
 					return True
 
@@ -59,7 +72,7 @@ class Cliente(Pessoa):
 
 			total = 0
 
-			for produto in self._carrinho:
+			for produto in self._carrinho.lista_produtos:
 				total += produto.valor
 
 			print("Total = {0:4.2f}".format(total))
