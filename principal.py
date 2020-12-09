@@ -9,6 +9,7 @@ import menus
 
 estoque = Estoque()
 loja = Loja()
+cliente = Cliente()
 
 
 while True:
@@ -28,7 +29,14 @@ while True:
     if(opcao == '1'):
         cliente = loja.buscar_cliente()
         if(cliente != []):
-            menus.menu_cliente()
+            while True:
+                opcao1 = menus.menu_cliente()
+                if(opcao1 == '1'):
+                    loja.cliente.add_produto(loja.estoque)
+                elif(opcao1 == '2'):
+                    cliente.rm_produto()
+                elif(opcao1 == '0'):
+                    break
         else:
             print("\nCpf Invalido!\nContate seu vendedor!\n")
 
