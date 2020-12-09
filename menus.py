@@ -3,7 +3,7 @@ def menu_cliente():
     print("|     Menu Cliente      |")
     print("-"*25)
     print("|                       |")
-    print("| 1 - Realizar Compra   |")
+    print("| 1 - Comprar           |")
     print("|                       |")
     print("| 2 - Consultar Valor   |")
     print("|                       |")
@@ -13,6 +13,20 @@ def menu_cliente():
     opcao = input("Escolha uma opcão: ")
     return opcao
 
+def menu_compras():
+    print("-"*25)
+    print("|     Menu Cliente      |")
+    print("-"*25)
+    print("|                       |")
+    print("| 1 - Adicionar Produto |")
+    print("|                       |")
+    print("| 2 - Retirar Produto   |")
+    print("|                       |")
+    print("| 0 - Voltar            |")
+    print("-"*25)
+
+    opcao = input("Escolha uma opcão: ")
+    return opcao
 
 def menu_func():
     print("-"*25)
