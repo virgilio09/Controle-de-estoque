@@ -32,35 +32,50 @@ while True:
         else:
             print("\nCpf Invalido!\nContate seu vendedor!\n")
 
-    elif(opcao == '2'):
+    elif(opcao == '2'):#menuFunc
         func = loja.buscar_funcionario()
         if(func != []):
             while True:
                 opcao2 = menus.menu_func()
-                if(opcao2 == '1'):
+                if(opcao2 == '1'):#cadastros
                     while True:
                         cadastros = menus.menu_cadastro()
                         if(cadastros == '1'):
-                            estoque.cadastrar_produto()
+                            loja.estoque.cadastrar_produto()
                         elif(cadastros == '2'):
                             loja.cadastra_cliente()
                         elif(cadastros == '3'):
                             loja.cadastra_func()
                         elif(cadastros == '0'):
                             break
-                elif(opcao2 == '2'):
+                elif(opcao2 == '2'):#remover
                     while True:
                         remover = menus.menu_remover()
                         if(remover == '1'):
-                            estoque.remover_produto()
+                            loja.estoque.remover_produto()
                         elif(remover == '2'):
-                            pass
+                            loja.remove_cliente()
                         elif(remover == '3'):
-                            pass
+                            loja.remove_func()
                         elif(remover == '0'):
                             break
-                elif(opcao2 == '3'):
-                    pass
+                elif(opcao2 == '3'):#Analise
+                    result = loja.buscar_cliente()
+                    if(result != []):
+                        loja.analise_compras(result[0])
+                    else:
+                        print("Nenhum cliente cadastrado!")
+                elif(opcao2 == '4'):#Listar
+                    while True:
+                        lista = menus.menu_listar()
+                        if(lista == '1'):#listarEstoque
+                            loja.estoque.mostrar_produtos()
+                        elif(lista == '2'):#listarFuncionarios
+                            loja.mostrar_func()
+                        elif(lista == '3'):#listarClientes
+                            loja.mostrar_clientes()
+                        elif(lista == '0'):#voltar
+                            break
                 elif(opcao2 == '0'):
                     break
         else:
