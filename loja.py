@@ -101,31 +101,42 @@ class Loja():
 
 	def analise_compras(self, Cliente):
 		
-		
 		if(Cliente._carrinho.lista_produtos != []):
 			self.cupom_fiscal(Cliente)
 			op = input("\nDeseja aprovar esta compra?(S/N)").lower()
 			if(op == 's'):
 				func = self.buscar_funcionario()
 				if(func != []):
+					Cliente.carrinho.lista_produtos.clear()
+					Cliente.carrinho.quantidade.clear()
 					print("Compra aprovada com sucesso!\n")
 				else:
 					print("\nCpf incorreto!\n")
 			else:
+				self.devolve_estoque_loja(Cliente,self._estoque)
 				print("Compra cancelada!")
+		
+		else:
+			print("\nNão há compras até o momento!\n")
 				
+	#responsavel por devolver os produtos, da compra não autorizada, para o estoque.
+	def devolve_estoque_loja(self,Cliente, Estoque):
 
-	def devolve_estoque(self,Cliente, Estoque):
-		for produto in Cliente._carrinho._lista_produtos:
-			Estoque.lista_produtos[produto].quantidade += produto.quantidade 
-
+		for produto in Cliente.carrinho.lista_produtos:
+			indice = Cliente.carrinho.lista_produtos.index(produto)
+			
+			for prod in Estoque.lista_produtos:
+				prod.quantidade += Cliente.carrinho.quantidade[indice]
+				del(Cliente.carrinho.quantidade[indice])
+				del(Cliente.carrinho.lista_produtos[indice])
 
 	def cupom_fiscal(self, Cliente):
 	
-		if(Cliente._carrinho._lista_produtos != []):
+		if(Cliente.carrinho.lista_produtos != []):
 			print("---- Cupom fiscal ----")
+			print("\nCódigo	Produto		Valor unit.		Quant.\n")
 			for produto in Cliente.carrinho.lista_produtos:
-				print("Código	Produto		Valor unit.\n")
-				print("{}	{}		{}".format(produto.codigo, produto.nome, produto.valor))
+				indice = Cliente.carrinho.lista_produtos.index(produto)
+				print("{}	{}		{}			{}".format(produto.codigo, produto.nome, produto.valor, Cliente.carrinho.quantidade[indice]))
 
 			Cliente.total_carrinho()
