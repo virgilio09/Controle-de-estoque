@@ -3,7 +3,7 @@ def menu_cliente():
     print("|     Menu Cliente      |")
     print("-"*25)
     print("|                       |")
-    print("| 1 - Comprar           |")
+    print("| 1 - Comprar/Retirar   |")
     print("|                       |")
     print("| 2 - Consultar Valor   |")
     print("|                       |")
