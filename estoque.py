@@ -17,9 +17,9 @@ class Estoque:
 		produto.codigo = input("Codigo: ")
 		produto.nome = input("Nome: ")
 		produto.valor = float(input("Valor: "))
-		Produto.quantidade = int(input("Quantidade: "))
+		produto.quantidade = int(input("Quantidade: "))
 	
-		self._lista_produtos.append (produto)
+		self._lista_produtos.append(produto)
 
 
 	def mostrar_produtos(self):
@@ -53,4 +53,4 @@ class Estoque:
 			print("Produto removido com sucesso")
 
 		else:
-			print("Produto não exite no estoque")
+			print("Produto não existe no estoque")
