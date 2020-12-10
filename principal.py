@@ -26,15 +26,22 @@ while True:
 
     opcao = input("Escolha uma opcão: ")
 
-    if(opcao == '1'):
+    if(opcao == '1'):#menuCliente
         cliente = loja.buscar_cliente()
         if(cliente != []):
             while True:
                 opcao1 = menus.menu_cliente()
                 if(opcao1 == '1'):
-                    loja.cliente.add_produto(loja.estoque)
+                    while True:
+                        compra = menus.menu_compras()
+                        if(compra == '1'):
+                            loja.cliente.add_produto(loja.estoque)
+                        elif(compra == '2'):
+                            loja.cliente.rm_produto(loja.estoque)
+                        elif(compra == '0'):
+                            break
                 elif(opcao1 == '2'):
-                    cliente.rm_produto()
+                    pass
                 elif(opcao1 == '0'):
                     break
         else:
