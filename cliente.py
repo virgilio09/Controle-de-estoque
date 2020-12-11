@@ -27,23 +27,28 @@ class Cliente(Pessoa):
 
 	# adicionar ao carrinho
 	def add_produto(self,Estoque):
-		
-		produto = Estoque.buscar_produto()
-		adicionou = False  
-		
-		if(produto != []):
-			qtd = input("Quantidade do produto que deseja adiconar: ")
-			quant = int(qtd)
-			produto[0].quantidade -= quant
-			self._carrinho._lista_produtos.append(produto[0])
-			self._carrinho.quantidade.append(quant)
-			print("Produto adicionado com sucesso!")
-			print("\nAguarde a aprovação do vendedor!")
-			adicionou = True
-		else:
-			print("Produto não encontrado no estoque!")
 
-		return adicionou
+		if(Estoque.lista_produtos != []):
+		
+			produto = Estoque.buscar_produto()
+			adicionou = False  
+			
+			if(produto != []):
+				qtd = input("Quantidade do produto que deseja adiconar: ")
+				quant = int(qtd)
+				produto[0].quantidade -= quant
+				self._carrinho._lista_produtos.append(produto[0])
+				self._carrinho.quantidade.append(quant)
+				print("Produto adicionado com sucesso!")
+				print("\nAguarde a aprovação do vendedor!")
+				adicionou = True
+			else:
+				print("Produto não encontrado no estoque!")
+
+			return adicionou
+
+		else:
+			print("O estoque está vazio\n")
 
 	# remover do carrinho
 	def rm_produto(self, Estoque):

@@ -1,15 +1,7 @@
-from cliente import Cliente
-from pessoa import Pessoa
-from estoque import Estoque
-from produto import Produto
-from funcionario import Funcionario
 from loja import Loja
 import menus
 
-
-estoque = Estoque()
 loja = Loja()
-cliente = Cliente()
 
 
 while True:
@@ -94,7 +86,6 @@ while True:
                 elif(opcao2 == '0'):
                     break
         else:
-            
             loja.cadastra_func() 
             
     elif(opcao == '0'):

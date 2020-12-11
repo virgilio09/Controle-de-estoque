@@ -17,7 +17,7 @@ class Loja():
 
 	@nome.setter
 	def nome(self, nome):
-		self.nome = nome
+		self._nome = nome
 
 	@property
 	def estoque(self):
