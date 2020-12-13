@@ -1,22 +1,17 @@
 from loja import Loja
 import menus
 
-loja = Loja()
 
+
+loja = Loja()
+print("Esse é seu primeiro acesso cadastre alguns dados")
+
+loja.nome = input("Nome da loja: ")
+print("Cadastre um Funcionario")
+loja.cadastra_func()
 
 while True:
-    print("-"*25)
-    print("|     Menu Principal    |")
-    print("-"*25)
-    print("|                       |")
-    print("| 1 - Cliente           |")
-    print("|                       |")
-    print("| 2 - Vendedor          |")
-    print("|                       |")
-    print("| 0 - Sair              |")
-    print("-"*25)
-
-    opcao = input("Escolha uma opcão: ")
+    opcao = menus.menu_principal(loja.nome)
 
     if(opcao == '1'):#menuCliente
         cliente = loja.buscar_cliente()
@@ -33,7 +28,7 @@ while True:
                         elif(compra == '0'):
                             break
                 elif(opcao1 == '2'):
-                    pass
+                    loja.estoque.mostrar_produtos()
                 elif(opcao1 == '0'):
                     break
         else:
@@ -86,7 +81,7 @@ while True:
                 elif(opcao2 == '0'):
                     break
         else:
-            loja.cadastra_func() 
+            print("Esse Funcionario não está cadastrado")
             
     elif(opcao == '0'):
         break

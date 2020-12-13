@@ -29,7 +29,7 @@ class Cliente(Pessoa):
 	def add_produto(self,Estoque):
 
 		if(Estoque.lista_produtos != []):
-		
+			Estoque.mostrar_produtos()
 			produto = Estoque.buscar_produto()
 			adicionou = False  
 			

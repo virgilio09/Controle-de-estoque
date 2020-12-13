@@ -1,3 +1,20 @@
+def menu_principal(nome):
+    print("\nNome da loja {}".format(nome))
+    print("-"*25)
+    print("|     Menu Principal    |")
+    print("-"*25)
+    print("|                       |")
+    print("| 1 - Cliente           |")
+    print("|                       |")
+    print("| 2 - Vendedor          |")
+    print("|                       |")
+    print("| 0 - Sair              |")
+    print("-"*25)
+
+    opcao = input("Escolha uma opcão: ")
+    return opcao
+
+
 def menu_cliente():
     print("-"*25)
     print("|     Menu Cliente      |")
@@ -5,7 +22,7 @@ def menu_cliente():
     print("|                       |")
     print("| 1 - Comprar/Retirar   |")
     print("|                       |")
-    print("| 2 - Consultar Valor   |")
+    print("| 2 - Listar Produtos   |")
     print("|                       |")
     print("| 0 - Voltar            |")
     print("-"*25)
