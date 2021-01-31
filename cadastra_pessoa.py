@@ -1,150 +1,72 @@
+from conexaoBD import Conexao
 
-# cadastra cliente
-class Pessoa:
-
+class Cadastra_func:
 	'''
-	class Pessoa()
-	---------------
-	Responsavel por receber as informações das pessoas que
-	serão cadastradas no sistema como, funcionários e clientes.
-	
-	Atributos
-	-----------
-	nome -> string
-	cpf -> string
-	
+	class Cadastra_func()
+	Realiza o cadastro dos funcionários em lista diferente das dos clientes.
 	'''
-	
-	__slots__ = ['_condicao','_nome', '_cpf'] 
-	
-	def __init__(self, nome, cpf):
-		self._condicao = None
-		self._nome = nome		
-		self._cpf = cpf
-
-	@property
-	def condicao(self):
-		return self._condicao
-
-	@condicao.setter
-	def condicao(self,condicao):
-		self._condicao = condicao
-			
-		
-	@property
-	def nome(self):
-		return self._nome
-
-	@property
-	def cpf(self):
-		return self._cpf
-	
-
-class Funcionario(Pessoa):
-
-	'''
-	class Funcionario()
-	-------------------
-	Responsavel por receber os dados dos funciários que serão
-	cadastrados no sistema.
-
-	Paramentros
-	-----------
-	Pessoa -> Pessoa()
-	nome -> Pessoa()
-	cpf -> Pessoa()
-
-	Atributos
-	----------
-	salario -> float
-	
-	'''
-
-	__slots__ = ['_condicao','_nome', '_cpf', '_salario'] 
-		
-	def __init__(self, condicao, nome, cpf, salario):
-		super().__init__(nome, cpf)
-		self._condicao = condicao
-		self._salario = salario
-		
-
-	@property
-	def condicao(self):
-		return self._condicao
-
-	@property
-	def salario(self):
-		return self._salario
-
-
-	@salario.setter
-	def salario(self, salario):
-		self._salario = salario
-	
-
-# cadastra cliente
-class Cadastra_pessoa(object):
-
-	'''
-	class Cadastra_pessoa()
-	-------------------------
-	Responsavel pelo cadastro de pessoas no sistema.
-
-	Atributos
-	----------
-	lista_pessoas -> list
-
-	funções
-	-------
-	cadastra
-	busca
-
-	'''
-
-	__slots__ = ['_lista_pessoas']
-
 	def __init__(self):
-		self._lista_pessoas = []
+		self.con = Conexao()
 
-	@property
-	def lista_pessoas(self):
-		return self._lista_pessoas
-	
+	def insere(self, nome, cpf, salario, senha):
 
-	def cadastra(self, pessoa):
-		'''
-		Funcao cadastra
-		---------------
-		Adiciona pessoas cadastradas a uma lista, se a pessoa
-		já estiver na lista a função retorna false e o cadastro não é
-		realizado.
-
-		Paramentros
-		------------
-		pessoa -> Pessoa
+		resp = self.busca_cpf(cpf)
 		
-		'''
-		existe = self.busca(pessoa.cpf)
-		if(existe == None):
-			self._lista_pessoas.append(pessoa)
-			return True
+		if(resp == None):
+			sql = 'INSERT INTO funcionario(nome, cpf, salario, senha) VALUES("%s", "%s", %.2f, MD5("%s"))'%(nome, cpf, salario, senha)
+			print(sql)
+			self.con.executaDML(sql)
 		
 		else:
 			return False
 
-	def busca(self, cpf):
-		for pessoa in self._lista_pessoas:
-			if(pessoa.cpf == cpf):
-				return pessoa
+	def busca_cpf(self, cpf):
+	
+		resp = self.con.executaDQL('SELECT nome, cpf, salario FROM funcionario WHERE cpf = "%s"' %cpf)
 
-		return None
+		if(resp != []):
+			return resp
+		else:
+			return None
+	
+	def login(self, cpf, senha):
 
-class Cadastra_funcionario(Cadastra_pessoa):
-	'''
-	class Cadastra_funcionario()
-	Realiza o cadastro dos funcionários em lista diferente das dos clientes.
-	'''
+		sql = 'SELECT nome, cpf FROM funcionario WHERE cpf = "%s" AND senha = MD5("%s")' %(cpf, senha)
 
+		resp = self.con.executaDQL(sql)
+
+		if(resp != []):
+			return True
+
+		else:
+			return False
+
+
+class Cadastra_cli:
+	
 	def __init__(self):
-		super().__init__()
+		self.con = Conexao()
 
+	def insere(self, nome, cpf):
+
+		resp = self.busca_cpf(cpf)
+		
+		if(resp == None):
+			sql = 'INSERT INTO cliente(nome, cpf) VALUES("%s", "%s")'%(nome, cpf)
+			self.con.executaDML(sql)
+		
+		else:
+			return False
+
+	def busca_cpf(self, cpf):
+	
+		resp = self.con.executaDQL('SELECT nome, cpf FROM cliente WHERE cpf = "%s"' %cpf)
+
+		if(resp != []):
+			return resp
+		else:
+			return None
+
+c = Cadastra_func()
+
+print(c.login('123', '1235'))

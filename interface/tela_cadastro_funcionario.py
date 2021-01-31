@@ -1,3 +1,7 @@
+# -*- coding: utf-8 -*-
+
+
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
@@ -43,19 +47,25 @@ class Tela_cadastro_funcionario(object):
         self.lineEdit_3.setGeometry(QtCore.QRect(210, 210, 141, 21))
         self.lineEdit_3.setObjectName("lineEdit_3")
         self.pushButton = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton.setGeometry(QtCore.QRect(470, 270, 90, 21))
+        self.pushButton.setGeometry(QtCore.QRect(430, 310, 90, 21))
         font = QtGui.QFont()
         font.setBold(True)
         font.setWeight(75)
         self.pushButton.setFont(font)
         self.pushButton.setObjectName("pushButton")
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_2.setGeometry(QtCore.QRect(210, 270, 90, 21))
+        self.pushButton_2.setGeometry(QtCore.QRect(210, 310, 90, 21))
         font = QtGui.QFont()
         font.setBold(True)
         font.setWeight(75)
         self.pushButton_2.setFont(font)
         self.pushButton_2.setObjectName("pushButton_2")
+        self.lineEdit_4 = QtWidgets.QLineEdit(self.centralwidget)
+        self.lineEdit_4.setGeometry(QtCore.QRect(210, 240, 141, 21))
+        self.lineEdit_4.setObjectName("lineEdit_4")
+        self.label_6 = QtWidgets.QLabel(self.centralwidget)
+        self.label_6.setGeometry(QtCore.QRect(120, 240, 58, 16))
+        self.label_6.setObjectName("label_6")
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
@@ -74,3 +84,4 @@ class Tela_cadastro_funcionario(object):
         self.label_5.setText(_translate("MainWindow", "Salário"))
         self.pushButton.setText(_translate("MainWindow", "Cadastrar"))
         self.pushButton_2.setText(_translate("MainWindow", "Voltar"))
+        self.label_6.setText(_translate("MainWindow", "Senha"))

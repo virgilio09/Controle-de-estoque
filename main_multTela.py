@@ -3,7 +3,7 @@ import sys
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox, QListWidgetItem
 
-sys.path.append('Controle-de-Estoque-com-Interface/interface')
+sys.path.append('Controle-de-estoque/interface')
 
 from tela_cadastro_cliente import Tela_cadastro_cliente
 from tela_cadastro_funcionario import Tela_cadastro_funcionario
@@ -22,9 +22,9 @@ from tela_excluir_funcionario import Tela_excluir_funcionario
 from tela_excluir_cliente import Tela_excluir_cliente
 from tela_excluir_produto import Tela_excluir_produto
 
-from cadastra_produtos import *
+# from cadastra_produtos import *
 from cadastra_pessoa import *
-from vendas import *
+# from vendas import *
 
 class Ui_main(QtWidgets.QWidget):
 
@@ -177,130 +177,119 @@ class Main(QMainWindow, Ui_main):
 		self.setupUi(self)
 
 		# cadastro de cliete
-		self.cadastra_cliente = Cadastra_pessoa()
+		# self.cadastra_cliente = Cadastra_pessoa()
 
 		# cadastro de funcionario
-		self.cadastra_funcionario = Cadastra_funcionario()
+		self.cadastra_fun = Cadastra_func()
 
 		# cadastro de produto
-		self.cadastra_produto = Cadastra_produto()
+		# self.cadastra_produto = Cadastra_produto()
 		
-		self.qtdAux = []
 		
 		#Interação tela primeiro acesso
 		self.primeiro_acesso.pushButton.clicked.connect(self.primeiro_cadastro)
 		self.primeiro_acesso.pushButton_2.clicked.connect(QtCore.QCoreApplication.instance().quit)
+		self.primeiro_acesso.pushButton_3.clicked.connect(lambda: self.QtStack.setCurrentIndex(7))
 		
 		# Interação tela inicial
-		self.tela_inicial.pushButton.clicked.connect(lambda: self.QtStack.setCurrentIndex(2))
-		self.tela_inicial.pushButton_2.clicked.connect(self.abrirLoginCli)
-		self.tela_inicial.pushButton_3.clicked.connect(QtCore.QCoreApplication.instance().quit)
+		# self.tela_inicial.pushButton.clicked.connect(lambda: self.QtStack.setCurrentIndex(2))
+		# self.tela_inicial.pushButton_2.clicked.connect(self.abrirLoginCli)
+		# self.tela_inicial.pushButton_3.clicked.connect(QtCore.QCoreApplication.instance().quit)
 
 		#Interação tela login funcionario
-		self.tela_login.pushButton.clicked.connect(self.btnLoginFunc)
-		self.tela_login.pushButton_2.clicked.connect(lambda: self.QtStack.setCurrentIndex(1))
+		# self.tela_login.pushButton.clicked.connect(self.btnLoginFunc)
+		# self.tela_login.pushButton_2.clicked.connect(lambda: self.QtStack.setCurrentIndex(1))
 
 		#Interação tela login cliete
-		self.tela_login_cli.pushButton.clicked.connect(self.btnLoginCli)
-		self.tela_login_cli.pushButton_2.clicked.connect(lambda: self.QtStack.setCurrentIndex(1))
+		# self.tela_login_cli.pushButton.clicked.connect(self.btnLoginCli)
+		# self.tela_login_cli.pushButton_2.clicked.connect(lambda: self.QtStack.setCurrentIndex(1))
 		
 		#Interação tela de opções para o Funcionario
-		self.tela_op_funcionario.pushButton.clicked.connect(lambda: self.QtStack.setCurrentIndex(4))#tipos de cadastro
-		self.tela_op_funcionario.pushButton_2.clicked.connect(lambda: self.QtStack.setCurrentIndex(5))#tipos de exclusao
-		self.tela_op_funcionario.pushButton_3.clicked.connect(lambda: self.QtStack.setCurrentIndex(6))#tipos de listagem
-		self.tela_op_funcionario.pushButton_4.clicked.connect(lambda: self.QtStack.setCurrentIndex(1))#voltar para login
+		# self.tela_op_funcionario.pushButton.clicked.connect(lambda: self.QtStack.setCurrentIndex(4))#tipos de cadastro
+		# self.tela_op_funcionario.pushButton_2.clicked.connect(lambda: self.QtStack.setCurrentIndex(5))#tipos de exclusao
+		# self.tela_op_funcionario.pushButton_3.clicked.connect(lambda: self.QtStack.setCurrentIndex(6))#tipos de listagem
+		# self.tela_op_funcionario.pushButton_4.clicked.connect(lambda: self.QtStack.setCurrentIndex(1))#voltar para login
 
-		#Interação tela tipos de cadastro
-		self.tela_tipo_cadastro.pushButton.clicked.connect(lambda: self.QtStack.setCurrentIndex(7))#cadastro de funcionarios
-		self.tela_tipo_cadastro.pushButton_2.clicked.connect(lambda: self.QtStack.setCurrentIndex(8))#cadastro de clientes
-		self.tela_tipo_cadastro.pushButton_3.clicked.connect(lambda: self.QtStack.setCurrentIndex(9))#cadastro de clientes
-		self.tela_tipo_cadastro.pushButton_4.clicked.connect(lambda: self.QtStack.setCurrentIndex(3))#voltar para tela de opções para funcionarios
+		# #Interação tela tipos de cadastro
+		# self.tela_tipo_cadastro.pushButton.clicked.connect(lambda: self.QtStack.setCurrentIndex(7))#cadastro de funcionarios
+		# self.tela_tipo_cadastro.pushButton_2.clicked.connect(lambda: self.QtStack.setCurrentIndex(8))#cadastro de clientes
+		# self.tela_tipo_cadastro.pushButton_3.clicked.connect(lambda: self.QtStack.setCurrentIndex(9))#cadastro de clientes
+		# self.tela_tipo_cadastro.pushButton_4.clicked.connect(lambda: self.QtStack.setCurrentIndex(3))#voltar para tela de opções para funcionarios
 
-		#Interação tela tipos de exclusao
-		self.tela_tipo_exclusao.pushButton.clicked.connect(lambda: self.QtStack.setCurrentIndex(14))
-		self.tela_tipo_exclusao.pushButton_2.clicked.connect(lambda: self.QtStack.setCurrentIndex(15))
-		self.tela_tipo_exclusao.pushButton_3.clicked.connect(lambda: self.QtStack.setCurrentIndex(16))
-		self.tela_tipo_exclusao.pushButton_4.clicked.connect(lambda: self.QtStack.setCurrentIndex(3))
+		# #Interação tela tipos de exclusao
+		# self.tela_tipo_exclusao.pushButton.clicked.connect(lambda: self.QtStack.setCurrentIndex(14))
+		# self.tela_tipo_exclusao.pushButton_2.clicked.connect(lambda: self.QtStack.setCurrentIndex(15))
+		# self.tela_tipo_exclusao.pushButton_3.clicked.connect(lambda: self.QtStack.setCurrentIndex(16))
+		# self.tela_tipo_exclusao.pushButton_4.clicked.connect(lambda: self.QtStack.setCurrentIndex(3))
 
-		#Interação tela tipos de listagens		
-		self.tela_listagens.pushButton.clicked.connect(self.btnListFunc)	
-		self.tela_listagens.pushButton_2.clicked.connect(self.btnListCli)
-		self.tela_listagens.pushButton_3.clicked.connect(self.btnListProd)		
-		self.tela_listagens.pushButton_4.clicked.connect(lambda: self.QtStack.setCurrentIndex(3))
+		# #Interação tela tipos de listagens		
+		# self.tela_listagens.pushButton.clicked.connect(self.btnListFunc)	
+		# self.tela_listagens.pushButton_2.clicked.connect(self.btnListCli)
+		# self.tela_listagens.pushButton_3.clicked.connect(self.btnListProd)		
+		# self.tela_listagens.pushButton_4.clicked.connect(lambda: self.QtStack.setCurrentIndex(3))
 
-		# Interação tela cadastra funcionario
-		self.tela_cadastro_funcionario.pushButton.clicked.connect(self.btnCadastra_func)
-		self.tela_cadastro_funcionario.pushButton_2.clicked.connect(lambda: self.QtStack.setCurrentIndex(4))
+		# # Interação tela cadastra funcionario
+		# self.tela_cadastro_funcionario.pushButton.clicked.connect(self.btnCadastra_func)
+		# self.tela_cadastro_funcionario.pushButton_2.clicked.connect(lambda: self.QtStack.setCurrentIndex(4))
 
-		# Interação tela cadastra cliente
-		self.tela_cadastro_cliente.pushButton.clicked.connect(self.btnCadastra_cliente)
-		self.tela_cadastro_cliente.pushButton_2.clicked.connect(lambda: self.QtStack.setCurrentIndex(4))
+		# # Interação tela cadastra cliente
+		# self.tela_cadastro_cliente.pushButton.clicked.connect(self.btnCadastra_cliente)
+		# self.tela_cadastro_cliente.pushButton_2.clicked.connect(lambda: self.QtStack.setCurrentIndex(4))
 
-		# Interação tela cadastra produto
-		self.tela_cadastro_produto.pushButton.clicked.connect(self.btnCadastra_produto)
-		self.tela_cadastro_produto.pushButton_2.clicked.connect(lambda: self.QtStack.setCurrentIndex(4))
+		# # Interação tela cadastra produto
+		# self.tela_cadastro_produto.pushButton.clicked.connect(self.btnCadastra_produto)
+		# self.tela_cadastro_produto.pushButton_2.clicked.connect(lambda: self.QtStack.setCurrentIndex(4))
 
-		# Interação listar dados
-		self.tela_listDados.pushButton.clicked.connect(self.clear_area)
+		# # Interação listar dados
+		# self.tela_listDados.pushButton.clicked.connect(self.clear_area)
 
-		# Interação tela de vendas
-		self.tela_vendas.pushButton.clicked.connect(self.btnAddProd)
-		self.tela_vendas.pushButton_2.clicked.connect(self.btnRemoverProd)
-		self.tela_vendas.pushButton_3.clicked.connect(self.btnFinalizar_comp)
-		self.tela_vendas.pushButton_4.clicked.connect(lambda: self.QtStack.setCurrentIndex(1))
+		# # Interação tela de vendas
+		# self.tela_vendas.pushButton.clicked.connect(self.btnAddProd)
+		# self.tela_vendas.pushButton_2.clicked.connect(self.btnRemoverProd)
+		# self.tela_vendas.pushButton_3.clicked.connect(self.btnFinalizar_comp)
+		# self.tela_vendas.pushButton_4.clicked.connect(lambda: self.QtStack.setCurrentIndex(1))
 
-		# Interação tela validar vendar
-		self.tela_validar.pushButton.clicked.connect(self.valida_compra)
-		self.tela_validar.pushButton_2.clicked.connect(lambda: self.QtStack.setCurrentIndex(13))
+		# # Interação tela validar vendar
+		# self.tela_validar.pushButton.clicked.connect(self.valida_compra)
+		# self.tela_validar.pushButton_2.clicked.connect(lambda: self.QtStack.setCurrentIndex(13))
 
-		#Interação para excluir funcionário
-		self.tela_excluir_funcionario.pushButton_2.clicked.connect(self.btnExcFunc)
-		self.tela_excluir_funcionario.pushButton.clicked.connect(lambda: self.QtStack.setCurrentIndex(5))
+		# #Interação para excluir funcionário
+		# self.tela_excluir_funcionario.pushButton_2.clicked.connect(self.btnExcFunc)
+		# self.tela_excluir_funcionario.pushButton.clicked.connect(lambda: self.QtStack.setCurrentIndex(5))
 
-		#Interação para excluir clientes
-		self.tela_excluir_cliente.pushButton_2.clicked.connect(self.btnExcCliente)
-		self.tela_excluir_cliente.pushButton.clicked.connect(lambda: self.QtStack.setCurrentIndex(5))
+		# #Interação para excluir clientes
+		# self.tela_excluir_cliente.pushButton_2.clicked.connect(self.btnExcCliente)
+		# self.tela_excluir_cliente.pushButton.clicked.connect(lambda: self.QtStack.setCurrentIndex(5))
 
-		#Interação para excluir produto
-		self.tela_excluir_produto.pushButton_2.clicked.connect(self.btnExcProd)
-		self.tela_excluir_produto.pushButton.clicked.connect(lambda: self.QtStack.setCurrentIndex(5))
+		# #Interação para excluir produto
+		# self.tela_excluir_produto.pushButton_2.clicked.connect(self.btnExcProd)
+		# self.tela_excluir_produto.pushButton.clicked.connect(lambda: self.QtStack.setCurrentIndex(5))
 
 	def primeiro_cadastro(self):
+		pass
 		'''
-		primeiro_cadastro()
+		primeiro_acesso()
 		-------------------
 		Define o primero funcionario do sistema, reliza o primero cadastro
 		'''
+		cpf = self.primeiro_acesso.lineEdit.text()
+		senha = self.primeiro_acesso.lineEdit_2.text()
 
+		print(cpf, senha)
 
+		if(not(cpf == '' or senha == '')):
+			if(self.cadastra_fun.login(cpf, senha)):
+				self.QtStack.setCurrentIndex(1)
 
-		nome = self.primeiro_acesso.lineEdit.text()
-		cpf = self.primeiro_acesso.lineEdit_2.text()
-		salario = self.primeiro_acesso.lineEdit_3.text()
-
-		if(not(nome == '' or cpf == '' or salario == '')):
-			
-			listaParaGerarCsv = []
-			lista = []
-			lista.append('cf')
-			lista.append(nome)
-			lista.append(cpf)
-			lista.append(salario)
-
-			listaParaGerarCsv.append(lista)
-			for line in listaParaGerarCsv:
-				clientSock.sendto(repr(line).encode('utf-8'),(address, port))
-			recebe = clientSock.recv(1024).decode()
-			if(recebe == 'True'):
-				QMessageBox.information(None, 'Cadastro', 'Funcionário cadastrado com sucesso!')
+			else:
+				QMessageBox.information(None, 'Login','Usuario não cadastrado')	
 				self.primeiro_acesso.lineEdit.setText('')
 				self.primeiro_acesso.lineEdit_2.setText('')
-				self.primeiro_acesso.lineEdit_3.setText('')
-				self.QtStack.setCurrentIndex(1)
-			else:
-				QMessageBox.information(None, 'Cadastro','Cpf informado, já cadastrado!')
+
+		
 		else:
-			QMessageBox.information(None, 'Cadastro', 'Informe todos os dados')
+			QMessageBox.information(None, 'Login', 'Informe todos os dados')
+
 
 	def btnLoginFunc(self):
 		'''
@@ -457,44 +446,44 @@ class Main(QMainWindow, Ui_main):
 		else:
 			QMessageBox.information(None, 'Cadastro', 'Informe todos os dados')
 	
-	def btnCadastra_produto(self):
-		'''
-		btnCadastra_cliente()
-		---------------------
-		Cadastra Produto criado um objeto do tipo Produto e
-		adiciona na lista de Produto
-		'''
-		condicao = 'cp'
-		codigo = self.tela_cadastro_produto.lineEdit.text()
-		nome = self.tela_cadastro_produto.lineEdit_2.text()
-		valor = self.tela_cadastro_produto.lineEdit_3.text()
-		quantidade = self.tela_cadastro_produto.lineEdit_4.text()
+	# def btnCadastra_produto(self):
+	# 	'''
+	# 	btnCadastra_cliente()
+	# 	---------------------
+	# 	Cadastra Produto criado um objeto do tipo Produto e
+	# 	adiciona na lista de Produto
+	# 	'''
+	# 	condicao = 'cp'
+	# 	codigo = self.tela_cadastro_produto.lineEdit.text()
+	# 	nome = self.tela_cadastro_produto.lineEdit_2.text()
+	# 	valor = self.tela_cadastro_produto.lineEdit_3.text()
+	# 	quantidade = self.tela_cadastro_produto.lineEdit_4.text()
 
-		if(not(codigo == '' or nome == '' or valor == '' or quantidade == '')):
-			qtd = int(quantidade)
-			val = float(valor)
-			listaParaGerarCsv = []
-			lista = []
-			lista.append(condicao)
-			lista.append(codigo)
-			lista.append(nome)
-			lista.append(valor)
-			lista.append(quantidade)
+	# 	if(not(codigo == '' or nome == '' or valor == '' or quantidade == '')):
+	# 		qtd = int(quantidade)
+	# 		val = float(valor)
+	# 		listaParaGerarCsv = []
+	# 		lista = []
+	# 		lista.append(condicao)
+	# 		lista.append(codigo)
+	# 		lista.append(nome)
+	# 		lista.append(valor)
+	# 		lista.append(quantidade)
 			
-			listaParaGerarCsv.append(lista)
-			for line in listaParaGerarCsv:
-				clientSock.sendto(repr(line).encode('utf-8'),(address,port))
-			recebe = clientSock.recv(1024).decode()
-			if(recebe == 'True'):
-				QMessageBox.information(None, 'Cadastro', 'Produto cadastrado com sucesso!')
-				self.tela_cadastro_produto.lineEdit.setText('')
-				self.tela_cadastro_produto.lineEdit_2.setText('')
-				self.tela_cadastro_produto.lineEdit_3.setText('')
-				self.tela_cadastro_produto.lineEdit_4.setText('')
-			else:
-				QMessageBox.information(None, 'Cadastro','Código informado já cadastrado!')
-		else:
-			QMessageBox.information(None, 'Cadastro', 'Informe todos os dados')
+	# 		listaParaGerarCsv.append(lista)
+	# 		for line in listaParaGerarCsv:
+	# 			clientSock.sendto(repr(line).encode('utf-8'),(address,port))
+	# 		recebe = clientSock.recv(1024).decode()
+	# 		if(recebe == 'True'):
+	# 			QMessageBox.information(None, 'Cadastro', 'Produto cadastrado com sucesso!')
+	# 			self.tela_cadastro_produto.lineEdit.setText('')
+	# 			self.tela_cadastro_produto.lineEdit_2.setText('')
+	# 			self.tela_cadastro_produto.lineEdit_3.setText('')
+	# 			self.tela_cadastro_produto.lineEdit_4.setText('')
+	# 		else:
+	# 			QMessageBox.information(None, 'Cadastro','Código informado já cadastrado!')
+	# 	else:
+	# 		QMessageBox.information(None, 'Cadastro', 'Informe todos os dados')
 
 	def btnListFunc(self):
 		self.QtStack.setCurrentIndex(10)
