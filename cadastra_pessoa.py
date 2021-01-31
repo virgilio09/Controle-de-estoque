@@ -67,6 +67,3 @@ class Cadastra_cli:
 		else:
 			return None
 
-c = Cadastra_func()
-
-print(c.login('123', '1235'))

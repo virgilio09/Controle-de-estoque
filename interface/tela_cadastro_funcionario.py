@@ -85,3 +85,8 @@ class Tela_cadastro_funcionario(object):
         self.pushButton.setText(_translate("MainWindow", "Cadastrar"))
         self.pushButton_2.setText(_translate("MainWindow", "Voltar"))
         self.label_6.setText(_translate("MainWindow", "Senha"))
+
+
+class Tela_primeiro_cad(Tela_cadastro_funcionario):
+    def __init__(self):
+    	super().__init__()
