@@ -17,10 +17,10 @@
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>230</x>
-      <y>90</y>
-      <width>151</width>
-      <height>20</height>
+      <x>210</x>
+      <y>70</y>
+      <width>211</width>
+      <height>21</height>
      </rect>
     </property>
     <property name="font">
@@ -58,19 +58,6 @@
      </rect>
     </property>
     <property name="text">
-     <string>Exclusão</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_3">
-    <property name="geometry">
-     <rect>
-      <x>230</x>
-      <y>250</y>
-      <width>141</width>
-      <height>28</height>
-     </rect>
-    </property>
-    <property name="text">
      <string>Listar</string>
     </property>
    </widget>
@@ -78,7 +65,7 @@
     <property name="geometry">
      <rect>
       <x>230</x>
-      <y>300</y>
+      <y>260</y>
       <width>141</width>
       <height>28</height>
      </rect>

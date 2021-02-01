@@ -41,6 +41,11 @@ class Cadastra_func:
 		else:
 			return False
 
+	def imprimir(self):
+		resp = self.con.executaDQL('SELECT nome, cpf, salario FROM funcionario')
+
+		return resp
+
 
 class Cadastra_cli:
 	
@@ -66,4 +71,11 @@ class Cadastra_cli:
 			return resp
 		else:
 			return None
+	
+
+	def imprimir(self):
+		resp = self.con.executaDQL('SELECT nome, cpf FROM cliente')
+
+		return resp
+
 

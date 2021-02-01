@@ -9,4 +9,10 @@ class Cadastra_prond:
 
 		sql = 'INSERT INTO produto(nome, valor, quantidade) VALUES("%s", %.2f, %d)'%(nome, valor, qtd)
 		self.con.executaDML(sql)
+
+	def imprimir(self):
+
+		resp = self.con.executaDQL('SELECT * FROM produto')
+
+		return resp
 		

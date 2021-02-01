@@ -1,4 +1,4 @@
-
+# -*- coding: utf-8 -*-
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
@@ -10,7 +10,7 @@ class Tela_op_funcionario(object):
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
-        self.label.setGeometry(QtCore.QRect(230, 90, 151, 20))
+        self.label.setGeometry(QtCore.QRect(210, 70, 211, 21))
         font = QtGui.QFont()
         font.setFamily("Roboto")
         font.setPointSize(12)
@@ -24,11 +24,8 @@ class Tela_op_funcionario(object):
         self.pushButton_2 = QtWidgets.QPushButton(self.centralwidget)
         self.pushButton_2.setGeometry(QtCore.QRect(230, 200, 141, 28))
         self.pushButton_2.setObjectName("pushButton_2")
-        self.pushButton_3 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_3.setGeometry(QtCore.QRect(230, 250, 141, 28))
-        self.pushButton_3.setObjectName("pushButton_3")
         self.pushButton_4 = QtWidgets.QPushButton(self.centralwidget)
-        self.pushButton_4.setGeometry(QtCore.QRect(230, 300, 141, 28))
+        self.pushButton_4.setGeometry(QtCore.QRect(230, 260, 141, 28))
         self.pushButton_4.setObjectName("pushButton_4")
         MainWindow.setCentralWidget(self.centralwidget)
         self.statusbar = QtWidgets.QStatusBar(MainWindow)
@@ -43,7 +40,5 @@ class Tela_op_funcionario(object):
         MainWindow.setWindowTitle(_translate("MainWindow", "Controle de Estoque"))
         self.label.setText(_translate("MainWindow", "Escolha uma opção:"))
         self.pushButton.setText(_translate("MainWindow", "Cadastro"))
-        self.pushButton_2.setText(_translate("MainWindow", "Exclusão"))
-        self.pushButton_3.setText(_translate("MainWindow", "Listar"))
+        self.pushButton_2.setText(_translate("MainWindow", "Listar"))
         self.pushButton_4.setText(_translate("MainWindow", "Voltar"))
-

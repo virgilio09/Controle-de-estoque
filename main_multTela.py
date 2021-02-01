@@ -4,7 +4,7 @@ from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox, QListWidgetItem
 
 from interface.tela_cadastro_cliente import Tela_cadastro_cliente
-from interface.tela_cadastro_funcionario import*
+from interface.tela_cadastro_funcionario import *
 from interface.tela_cadastro_produto import Tela_cadastro_produto
 from interface.tela_inicial import Tela_inicial
 from interface.tela_primeiro_acesso import Tela_primeiro_acesso
@@ -16,9 +16,7 @@ from interface.tela_tipo_exclusao import Tela_tipo_exclusao
 from interface.tela_listDados import Tela_listDados
 from interface.tela_vendas import Tela_vendas
 from interface.tela_validar import Tela_validar
-from interface.tela_excluir_funcionario import Tela_excluir_funcionario
-from interface.tela_excluir_cliente import Tela_excluir_cliente
-from interface.tela_excluir_produto import Tela_excluir_produto
+from interface.telaLista import TelaListProd, TelaListaCli, TelaListaFunc
 
 from cadastra_produtos import *
 from cadastra_pessoa import *
@@ -126,14 +124,14 @@ class Ui_main(QtWidgets.QWidget):
 		self.tela_validar = Tela_validar()
 		self.tela_validar.setupUi(self.stack13)
 
-		self.tela_excluir_funcionario = Tela_excluir_funcionario()
-		self.tela_excluir_funcionario.setupUi(self.stack14)
+		self.telaListaFun = TelaListaFunc()
+		self.telaListaFun.setupUi(self.stack14)
 
-		self.tela_excluir_cliente = Tela_excluir_cliente()
-		self.tela_excluir_cliente.setupUi(self.stack15)
+		self.telaListaCli = TelaListaCli()
+		self.telaListaCli.setupUi(self.stack15)
 
-		self.tela_excluir_produto = Tela_excluir_produto()
-		self.tela_excluir_produto.setupUi(self.stack16)
+		self.telaListaProd = TelaListProd()
+		self.telaListaProd.setupUi(self.stack16)
 
 		self.tela_primeiro_cad = Tela_primeiro_cad()
 		self.tela_primeiro_cad.setupUi(self.stack17)
@@ -152,9 +150,9 @@ class Ui_main(QtWidgets.QWidget):
 		self.QtStack.addWidget(self.stack11)#tela login cliente
 		self.QtStack.addWidget(self.stack12)#tela de vendas
 		self.QtStack.addWidget(self.stack13)#tela de validar
-		self.QtStack.addWidget(self.stack14)#tela de exclusão de funcionário
-		self.QtStack.addWidget(self.stack15)#tela de exclusão de cliente
-		self.QtStack.addWidget(self.stack16)#tela de exclusão de produto
+		self.QtStack.addWidget(self.stack14)#tela lista funcionario / excluir
+		self.QtStack.addWidget(self.stack15)#tela lista Cliente / ecluir
+		self.QtStack.addWidget(self.stack16)#tela lista de produto / excluir
 		self.QtStack.addWidget(self.stack17)#tela cadastra primero acesso
 
 		
@@ -211,8 +209,7 @@ class Main(QMainWindow, Ui_main):
 		
 		#Interação tela de opções para o Funcionario
 		self.tela_op_funcionario.pushButton.clicked.connect(lambda: self.QtStack.setCurrentIndex(4))#tipos de cadastro
-		# self.tela_op_funcionario.pushButton_2.clicked.connect(lambda: self.QtStack.setCurrentIndex(5))#tipos de exclusao
-		# self.tela_op_funcionario.pushButton_3.clicked.connect(lambda: self.QtStack.setCurrentIndex(6))#tipos de listagem
+		self.tela_op_funcionario.pushButton_2.clicked.connect(lambda: self.QtStack.setCurrentIndex(6))#tipos de listagem
 		self.tela_op_funcionario.pushButton_4.clicked.connect(lambda: self.QtStack.setCurrentIndex(1))#voltar para login
 
 		# Interação tela tipos de cadastro
@@ -221,17 +218,20 @@ class Main(QMainWindow, Ui_main):
 		self.tela_tipo_cadastro.pushButton_3.clicked.connect(lambda: self.QtStack.setCurrentIndex(9))#cadastro de produto
 		self.tela_tipo_cadastro.pushButton_4.clicked.connect(lambda: self.QtStack.setCurrentIndex(3))#voltar para tela de opções para funcionarios
 
-		# #Interação tela tipos de exclusao
-		# self.tela_tipo_exclusao.pushButton.clicked.connect(lambda: self.QtStack.setCurrentIndex(14))
-		# self.tela_tipo_exclusao.pushButton_2.clicked.connect(lambda: self.QtStack.setCurrentIndex(15))
-		# self.tela_tipo_exclusao.pushButton_3.clicked.connect(lambda: self.QtStack.setCurrentIndex(16))
-		# self.tela_tipo_exclusao.pushButton_4.clicked.connect(lambda: self.QtStack.setCurrentIndex(3))
+		# Interação tela tipos de listagens		
+		self.tela_listagens.pushButton.clicked.connect(self.btnListFunc)	
+		self.tela_listagens.pushButton_2.clicked.connect(self.btnListCli)
+		self.tela_listagens.pushButton_3.clicked.connect(self.btnListProd)		
+		self.tela_listagens.pushButton_4.clicked.connect(lambda: self.QtStack.setCurrentIndex(3))
 
-		# #Interação tela tipos de listagens		
-		# self.tela_listagens.pushButton.clicked.connect(self.btnListFunc)	
-		# self.tela_listagens.pushButton_2.clicked.connect(self.btnListCli)
-		# self.tela_listagens.pushButton_3.clicked.connect(self.btnListProd)		
-		# self.tela_listagens.pushButton_4.clicked.connect(lambda: self.QtStack.setCurrentIndex(3))
+		# interação listar Func
+		self.telaListaFun.pushButton_3.clicked.connect(lambda: self.QtStack.setCurrentIndex(6))
+
+		# interaçãp listar Cli
+		self.telaListaCli.pushButton_3.clicked.connect(lambda: self.QtStack.setCurrentIndex(6))
+
+		# interaçãp listar prod
+		self.telaListaProd.pushButton_3.clicked.connect(lambda: self.QtStack.setCurrentIndex(6))
 
 		# Interação tela cadastra funcionario
 		self.tela_cadastro_funcionario.pushButton.clicked.connect(self.btnCadastra_func)
@@ -245,8 +245,6 @@ class Main(QMainWindow, Ui_main):
 		self.tela_cadastro_produto.pushButton.clicked.connect(self.btnCadastra_prod)
 		self.tela_cadastro_produto.pushButton_2.clicked.connect(lambda: self.QtStack.setCurrentIndex(4))
 
-		# # Interação listar dados
-		# self.tela_listDados.pushButton.clicked.connect(self.clear_area)
 
 		# # Interação tela de vendas
 		# self.tela_vendas.pushButton.clicked.connect(self.btnAddProd)
@@ -443,11 +441,9 @@ class Main(QMainWindow, Ui_main):
 		if(not(nome == '' or cpf == '')):
 		
 			if(self.cadastra_cli.insere(nome, cpf) == None):
-				QMessageBox.information(None, 'Cadastro', 'Funcionário cadastrado com sucesso!')
+				QMessageBox.information(None, 'Cadastro', 'Cliete cadastrado com sucesso!')
 				self.tela_cadastro_cliente.lineEdit.setText('')
 				self.tela_cadastro_cliente.lineEdit_2.setText('')
-				self.tela_cadastro_cliente.lineEdit_3.setText('')
-				self.tela_cadastro_cliente.lineEdit_4.setText('')
 			
 			else:
 				QMessageBox.information(None, 'Cadastro','Cpf informado, já cadastrado!')
@@ -480,223 +476,228 @@ class Main(QMainWindow, Ui_main):
 			QMessageBox.information(None, 'Cadastro', 'Informe todos os dados')
 
 	def btnListFunc(self):
-		self.QtStack.setCurrentIndex(10)
-		for qtd,func in enumerate(self.cadastra_funcionario.lista_pessoas):
-			info = "Funcionario: {}\nNome: {}\nCPF: {}\nSalario: {}\n".format(qtd+1,func.nome, func.cpf, func.salario)
-			self.tela_listDados.listWidget.addItem(info)
+		resp = self.cadastra_fun.imprimir()
+
+		self.telaListaFun.tableWidget.setRowCount(len(resp))
+		self.telaListaFun.tableWidget.setColumnCount(3)
+
+		for i in range(0, len(resp)):
+			for j in range(0, 3):
+				self.telaListaFun.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(resp[i][j])))
+		
+		self.QtStack.setCurrentIndex(14)
+
 
 	def btnListCli(self):
 
-		if(self.cadastra_cliente.lista_pessoas != []):
-			self.QtStack.setCurrentIndex(10)
+		resp = self.cadastra_cli.imprimir()
 
-			for qtd, cli in  enumerate(self.cadastra_cliente.lista_pessoas):
-				info = "Clinte: {}\nNome: {}\nCPF: {}\n".format(qtd+1, cli.nome, cli.cpf)
-				self.tela_listDados.listWidget.addItem(info)
+		self.telaListaCli.tableWidget.setRowCount(len(resp))
+		self.telaListaCli.tableWidget.setColumnCount(2)
 
-		else:
-			QMessageBox.information(None, 'Listar', 'Não existem clientes cadastrados')
+		for i in range(0, len(resp)):
+			for j in range(0, 2):
+				self.telaListaCli.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(resp[i][j])))
+		
+		self.QtStack.setCurrentIndex(15)
 
 	def btnListProd(self):
 
-		if(self.cadastra_produto.lista_produtos != []):
-			self.QtStack.setCurrentIndex(10)
+		resp = self.cadastra_prod.imprimir()
 
-			for qtd, prod in  enumerate(self.cadastra_produto.lista_produtos):
-				info = "Produto: {}\nCódigo: {}\nNome: {}\nValor: {}\nQuantidade: {}\n" \
-				.format(qtd+1, prod.codigo, prod.nome, prod.valor, prod.quantidade)
-				self.tela_listDados.listWidget.addItem(info)
+		self.telaListaProd.tableWidget.setRowCount(len(resp))
+		self.telaListaProd.tableWidget.setColumnCount(4)
 
-		else:
-			QMessageBox.information(None, 'Listar', 'Não existem produtos cadastrados')
-	
-	def clear_area(self):
-		self.tela_listDados.listWidget.clear()
-		self.QtStack.setCurrentIndex(6)
+		for i in range(0, len(resp)):
+			for j in range(0, 4):
+				self.telaListaProd.tableWidget.setItem(i, j, QtWidgets.QTableWidgetItem(str(resp[i][j])))
+		
+		self.QtStack.setCurrentIndex(16)
+
 	
 	# Vendas
-	def btnAddProd(self):
-		'''
-		btnAddProd()
-		------------
-		Ações de vendas, trabalha com as funções da classe Venda
+	# def btnAddProd(self):
+	# 	'''
+	# 	btnAddProd()
+	# 	------------
+	# 	Ações de vendas, trabalha com as funções da classe Venda
 
-		'''
-		codigo = self.tela_vendas.lineEdit.text()
-		quantidade = self.tela_vendas.lineEdit_2.text()
+	# 	'''
+	# 	codigo = self.tela_vendas.lineEdit.text()
+	# 	quantidade = self.tela_vendas.lineEdit_2.text()
 
 
-		if(codigo != '' or quantidade != ''):
-			produto = self.cadastra_produto.busca(codigo)
+	# 	if(codigo != '' or quantidade != ''):
+	# 		produto = self.cadastra_produto.busca(codigo)
 			
-			if(produto != None and produto.quantidade > 0):
-				qtd = int(quantidade)
+	# 		if(produto != None and produto.quantidade > 0):
+	# 			qtd = int(quantidade)
 				
-				if(self.vendas.add_produto(produto, qtd)):
-					self.qtdAux.append(qtd)
+	# 			if(self.vendas.add_produto(produto, qtd)):
+	# 				self.qtdAux.append(qtd)
 
-					self.tela_vendas.listWidget_2.clear()
+	# 				self.tela_vendas.listWidget_2.clear()
 
-					self.tela_vendas.lineEdit_3.setText('')
-					self.tela_vendas.lineEdit_3.setText(str(self.vendas.total))
+	# 				self.tela_vendas.lineEdit_3.setText('')
+	# 				self.tela_vendas.lineEdit_3.setText(str(self.vendas.total))
 				
-					self.tela_vendas.listWidget_2.clear()
-					for qtd, prod in  enumerate(self.vendas.lista_compras):
-						info = "Produto: {}\nCódigo: {}\nNome: {}\nValor: {}\nQuantidade: {}\n" \
-						.format(qtd+1, prod.codigo, prod.nome, prod.valor, prod.quantidade)
+	# 				self.tela_vendas.listWidget_2.clear()
+	# 				for qtd, prod in  enumerate(self.vendas.lista_compras):
+	# 					info = "Produto: {}\nCódigo: {}\nNome: {}\nValor: {}\nQuantidade: {}\n" \
+	# 					.format(qtd+1, prod.codigo, prod.nome, prod.valor, prod.quantidade)
 						
-						self.tela_vendas.listWidget_2.addItem(info)
+	# 					self.tela_vendas.listWidget_2.addItem(info)
 						
 					
-					self.tela_vendas.listWidget.clear()
-					zerado = True
-					for qtd, prod in  enumerate(self.cadastra_produto.lista_produtos):
-						if(prod.quantidade > 0):
-							info = "Produto: {}\nCódigo: {}\nNome: {}\nValor: {}\nQuantidade: {}\n" \
-							.format(qtd+1, prod.codigo, prod.nome, prod.valor, prod.quantidade)
-							self.tela_vendas.listWidget.addItem(info)
-							zerado = False
+	# 				self.tela_vendas.listWidget.clear()
+	# 				zerado = True
+	# 				for qtd, prod in  enumerate(self.cadastra_produto.lista_produtos):
+	# 					if(prod.quantidade > 0):
+	# 						info = "Produto: {}\nCódigo: {}\nNome: {}\nValor: {}\nQuantidade: {}\n" \
+	# 						.format(qtd+1, prod.codigo, prod.nome, prod.valor, prod.quantidade)
+	# 						self.tela_vendas.listWidget.addItem(info)
+	# 						zerado = False
 						
-					if(zerado):
-						QMessageBox.information(None, 'Vendas', 'Estoque zerado')
+	# 				if(zerado):
+	# 					QMessageBox.information(None, 'Vendas', 'Estoque zerado')
 
 					
-				else:
-					QMessageBox.information(None, 'Vendas', 'Quantidade invalida')
+	# 			else:
+	# 				QMessageBox.information(None, 'Vendas', 'Quantidade invalida')
 
-			else:
-				QMessageBox.information(None, 'Vendas', 'Produto não existe')
+	# 		else:
+	# 			QMessageBox.information(None, 'Vendas', 'Produto não existe')
 
-		else:
-			QMessageBox.information(None, 'Vendas', 'Preencha todos os Dados')
+	# 	else:
+	# 		QMessageBox.information(None, 'Vendas', 'Preencha todos os Dados')
 		
-		self.tela_vendas.lineEdit.setText('')
-		self.tela_vendas.lineEdit_2.setText('')
+	# 	self.tela_vendas.lineEdit.setText('')
+	# 	self.tela_vendas.lineEdit_2.setText('')
 
-	def btnRemoverProd(self):
+	# def btnRemoverProd(self):
 		
-		lista = self.tela_vendas.listWidget_2.selectedItems()
+	# 	lista = self.tela_vendas.listWidget_2.selectedItems()
 
-		if(self.vendas.lista_compras != []):
-				if(lista != []):
-					#self.tela_vendas.listWidget_2.clear()
-					self.tela_vendas.lineEdit_3.setText('')
+	# 	if(self.vendas.lista_compras != []):
+	# 			if(lista != []):
+	# 				#self.tela_vendas.listWidget_2.clear()
+	# 				self.tela_vendas.lineEdit_3.setText('')
 
-					if not lista:
-						return
-					for itm in lista:
-						indice = self.tela_vendas.listWidget_2.row(itm)
-						self.tela_vendas.listWidget_2.takeItem(self.tela_vendas.listWidget_2.row(itm))
+	# 				if not lista:
+	# 					return
+	# 				for itm in lista:
+	# 					indice = self.tela_vendas.listWidget_2.row(itm)
+	# 					self.tela_vendas.listWidget_2.takeItem(self.tela_vendas.listWidget_2.row(itm))
 
-					self.vendas.total -= self.vendas.lista_compras[indice].valor * self.qtdAux[indice]
+	# 				self.vendas.total -= self.vendas.lista_compras[indice].valor * self.qtdAux[indice]
 					
-					cod = self.vendas.lista_compras[indice].codigo
-					for i in self.cadastra_produto.lista_produtos:
-						if(i.codigo == cod):
-							i.quantidade += self.qtdAux[indice]
-					del(self.vendas.lista_compras[indice])
-					del(self.qtdAux[indice])
+	# 				cod = self.vendas.lista_compras[indice].codigo
+	# 				for i in self.cadastra_produto.lista_produtos:
+	# 					if(i.codigo == cod):
+	# 						i.quantidade += self.qtdAux[indice]
+	# 				del(self.vendas.lista_compras[indice])
+	# 				del(self.qtdAux[indice])
 
-					self.tela_vendas.lineEdit_3.setText('')
-					self.tela_vendas.lineEdit_3.setText(str(self.vendas.total))
+	# 				self.tela_vendas.lineEdit_3.setText('')
+	# 				self.tela_vendas.lineEdit_3.setText(str(self.vendas.total))
 
-					self.tela_vendas.listWidget_2.clear()
-					for qtd, prod in  enumerate(self.vendas.lista_compras):
-						info = "Produto: {}\nCódigo: {}\nNome: {}\nValor: {}\nQuantidade: {}\n" \
-						.format(qtd+1, prod.codigo, prod.nome, prod.valor, prod.quantidade)
-						self.tela_vendas.listWidget_2.addItem(info)
+	# 				self.tela_vendas.listWidget_2.clear()
+	# 				for qtd, prod in  enumerate(self.vendas.lista_compras):
+	# 					info = "Produto: {}\nCódigo: {}\nNome: {}\nValor: {}\nQuantidade: {}\n" \
+	# 					.format(qtd+1, prod.codigo, prod.nome, prod.valor, prod.quantidade)
+	# 					self.tela_vendas.listWidget_2.addItem(info)
 
-					self.tela_vendas.listWidget.clear()
-					for qtd, prod in  enumerate(self.cadastra_produto.lista_produtos):		
-						info = "Produto: {}\nCódigo: {}\nNome: {}\nValor: {}\nQuantidade: {}\n" \
-						.format(qtd+1, prod.codigo, prod.nome, prod.valor, prod.quantidade)
-						self.tela_vendas.listWidget.addItem(info)
-				else:
-					QMessageBox.information(None, 'Vendas', 'Nenhum item selecionado!')
+	# 				self.tela_vendas.listWidget.clear()
+	# 				for qtd, prod in  enumerate(self.cadastra_produto.lista_produtos):		
+	# 					info = "Produto: {}\nCódigo: {}\nNome: {}\nValor: {}\nQuantidade: {}\n" \
+	# 					.format(qtd+1, prod.codigo, prod.nome, prod.valor, prod.quantidade)
+	# 					self.tela_vendas.listWidget.addItem(info)
+	# 			else:
+	# 				QMessageBox.information(None, 'Vendas', 'Nenhum item selecionado!')
 		
-		else:
-			QMessageBox.information(None, 'Vendas', 'Lista de compras vazia!')
+	# 	else:
+	# 		QMessageBox.information(None, 'Vendas', 'Lista de compras vazia!')
 		
-	def btnFinalizar_comp(self):
-		'''
-		btnFinalizar_comp()
-		-------------------
-		Responsavel por redirecionar o usuario quando a compra for finalizada 
+	# def btnFinalizar_comp(self):
+	# 	'''
+	# 	btnFinalizar_comp()
+	# 	-------------------
+	# 	Responsavel por redirecionar o usuario quando a compra for finalizada 
 
-		'''
+	# 	'''
 
-		if(self.vendas.lista_compras != []):
-			self.QtStack.setCurrentIndex(13)
-		else:
-			QMessageBox.information(None, 'Vendas', 'Adicione algum produto no carrilho')
+	# 	if(self.vendas.lista_compras != []):
+	# 		self.QtStack.setCurrentIndex(13)
+	# 	else:
+	# 		QMessageBox.information(None, 'Vendas', 'Adicione algum produto no carrilho')
 
-	def valida_compra(self):
+	# def valida_compra(self):
 
-		'''
-		valida_compra()
-		---------------
-		Buca por um funcionario, antes da compra ser finalida
-		'''
+	# 	'''
+	# 	valida_compra()
+	# 	---------------
+	# 	Buca por um funcionario, antes da compra ser finalida
+	# 	'''
 
-		cpf = self.tela_validar.lineEdit.text()
+	# 	cpf = self.tela_validar.lineEdit.text()
 
-		if(cpf != ''):
-			existe = self.cadastra_funcionario.busca(cpf)
+	# 	if(cpf != ''):
+	# 		existe = self.cadastra_funcionario.busca(cpf)
 
-			if(existe != None):
-				QMessageBox.information(None, 'Vendas', 'Compra concluida')
-				self.tela_validar.lineEdit.setText('')
-				self.cadastra_produto.rm_prod_zerado()
-				self.QtStack.setCurrentIndex(1)
+	# 		if(existe != None):
+	# 			QMessageBox.information(None, 'Vendas', 'Compra concluida')
+	# 			self.tela_validar.lineEdit.setText('')
+	# 			self.cadastra_produto.rm_prod_zerado()
+	# 			self.QtStack.setCurrentIndex(1)
 			
-			else:
-				QMessageBox.information(None, 'Vendas', 'Funcionario não encontrado')
-				cpf = self.tela_validar.lineEdit.setText('')
+	# 		else:
+	# 			QMessageBox.information(None, 'Vendas', 'Funcionario não encontrado')
+	# 			cpf = self.tela_validar.lineEdit.setText('')
 
-		else:
-			QMessageBox.information(None, 'Vendas', 'Preencha todos os Dados')
+	# 	else:
+	# 		QMessageBox.information(None, 'Vendas', 'Preencha todos os Dados')
 
-	def btnExcFunc(self):
-		cpf = self.tela_excluir_funcionario.lineEdit.text()
-		self.tela_excluir_funcionario.lineEdit.setText('')
-		if(cpf != ''):
-			funcionario = self.cadastra_funcionario.busca(cpf)
-			if(funcionario != None):
-				self.cadastra_funcionario.lista_pessoas.remove(funcionario)
-				self.tela_excluir_funcionario.lineEdit.setText('')
-				QMessageBox.information(None,'Excluir', 'Funcinário Excluido')
-			else:
-				QMessageBox.information(None,'Excluir', 'Funcinário não encontrado!')
-		else:
-			QMessageBox.information(None, 'Excluir', 'Campo obrigatório!')
+	# def btnExcFunc(self):
+	# 	cpf = self.tela_excluir_funcionario.lineEdit.text()
+	# 	self.tela_excluir_funcionario.lineEdit.setText('')
+	# 	if(cpf != ''):
+	# 		funcionario = self.cadastra_funcionario.busca(cpf)
+	# 		if(funcionario != None):
+	# 			self.cadastra_funcionario.lista_pessoas.remove(funcionario)
+	# 			self.tela_excluir_funcionario.lineEdit.setText('')
+	# 			QMessageBox.information(None,'Excluir', 'Funcinário Excluido')
+	# 		else:
+	# 			QMessageBox.information(None,'Excluir', 'Funcinário não encontrado!')
+	# 	else:
+	# 		QMessageBox.information(None, 'Excluir', 'Campo obrigatório!')
 
-	def btnExcCliente(self):
-		cpf = self.tela_excluir_cliente.lineEdit.text()
+	# def btnExcCliente(self):
+	# 	cpf = self.tela_excluir_cliente.lineEdit.text()
 
-		if(cpf != ''):
-			cliente = self.cadastra_cliente.busca(cpf)
-			if(cliente != None):
-				self.cadastra_cliente.lista_pessoas.remove(cliente)
-				self.tela_excluir_cliente.lineEdit.setText('')
-				QMessageBox.information(None, 'Excluir', 'Cliente excluido do cadastro')
-			else:
-				QMessageBox.information(None,'Excluir', 'Cliente não encontrado!')
-		else:
-			QMessageBox.information(None, 'Excluir', 'Campo obrigatório!')
+	# 	if(cpf != ''):
+	# 		cliente = self.cadastra_cliente.busca(cpf)
+	# 		if(cliente != None):
+	# 			self.cadastra_cliente.lista_pessoas.remove(cliente)
+	# 			self.tela_excluir_cliente.lineEdit.setText('')
+	# 			QMessageBox.information(None, 'Excluir', 'Cliente excluido do cadastro')
+	# 		else:
+	# 			QMessageBox.information(None,'Excluir', 'Cliente não encontrado!')
+	# 	else:
+	# 		QMessageBox.information(None, 'Excluir', 'Campo obrigatório!')
 
-	def btnExcProd(self):
-		cod = self.tela_excluir_produto.lineEdit.text()
+	# def btnExcProd(self):
+	# 	cod = self.tela_excluir_produto.lineEdit.text()
 
-		if(cod != ''):
-			codigo = self.cadastra_produto.busca(cod)
-			if(codigo != None):
-				self.cadastra_produto.lista_produtos.remove(codigo)
-				self.tela_excluir_cliente.lineEdit.setText('')
-				QMessageBox.information(None, 'Excluir', 'Produto excluido do estoque')
-			else:
-				QMessageBox.information(None,'Excluir', 'Produto não encontrado!')
-		else:
-			QMessageBox.information(None, 'Excluir', 'Campo obrigatório!')
+	# 	if(cod != ''):
+	# 		codigo = self.cadastra_produto.busca(cod)
+	# 		if(codigo != None):
+	# 			self.cadastra_produto.lista_produtos.remove(codigo)
+	# 			self.tela_excluir_cliente.lineEdit.setText('')
+	# 			QMessageBox.information(None, 'Excluir', 'Produto excluido do estoque')
+	# 		else:
+	# 			QMessageBox.information(None,'Excluir', 'Produto não encontrado!')
+	# 	else:
+	# 		QMessageBox.information(None, 'Excluir', 'Campo obrigatório!')
 
 
 
@@ -704,4 +705,4 @@ if __name__ == "__main__":
 	app = QApplication(sys.argv)
 	show_main = Main()
 	sys.exit(app.exec_())
-	clientSock.close()
+	Main.close()
