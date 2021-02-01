@@ -45,7 +45,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>Código</string>
+     <string>Nome</string>
     </property>
    </widget>
    <widget class="QLabel" name="label_3">
@@ -53,20 +53,7 @@
      <rect>
       <x>120</x>
       <y>160</y>
-      <width>58</width>
-      <height>16</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Nome</string>
-    </property>
-   </widget>
-   <widget class="QLabel" name="label_4">
-    <property name="geometry">
-     <rect>
-      <x>120</x>
-      <y>190</y>
-      <width>58</width>
+      <width>71</width>
       <height>16</height>
      </rect>
     </property>
@@ -74,12 +61,12 @@
      <string>Valor(R$)</string>
     </property>
    </widget>
-   <widget class="QLabel" name="label_5">
+   <widget class="QLabel" name="label_4">
     <property name="geometry">
      <rect>
       <x>120</x>
-      <y>220</y>
-      <width>71</width>
+      <y>190</y>
+      <width>91</width>
       <height>16</height>
      </rect>
     </property>
@@ -92,7 +79,7 @@
      <rect>
       <x>120</x>
       <y>100</y>
-      <width>121</width>
+      <width>221</width>
       <height>16</height>
      </rect>
     </property>
@@ -113,7 +100,7 @@
      <rect>
       <x>210</x>
       <y>130</y>
-      <width>113</width>
+      <width>351</width>
       <height>21</height>
      </rect>
     </property>
@@ -123,7 +110,7 @@
      <rect>
       <x>210</x>
       <y>160</y>
-      <width>351</width>
+      <width>71</width>
       <height>21</height>
      </rect>
     </property>
@@ -134,16 +121,6 @@
       <x>210</x>
       <y>190</y>
       <width>71</width>
-      <height>21</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="lineEdit_4">
-    <property name="geometry">
-     <rect>
-      <x>210</x>
-      <y>220</y>
-      <width>41</width>
       <height>21</height>
      </rect>
     </property>
