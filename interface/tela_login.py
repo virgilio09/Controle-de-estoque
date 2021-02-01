@@ -3,7 +3,6 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-
 class Tela_login_func(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
@@ -25,6 +24,7 @@ class Tela_login_func(object):
         self.lineEdit.setObjectName("lineEdit")
         self.lineEdit_2 = QtWidgets.QLineEdit(Dialog)
         self.lineEdit_2.setGeometry(QtCore.QRect(250, 210, 113, 25))
+        self.lineEdit_2.setEchoMode(QtWidgets.QLineEdit.Password)
         self.lineEdit_2.setObjectName("lineEdit_2")
         self.pushButton = QtWidgets.QPushButton(Dialog)
         self.pushButton.setGeometry(QtCore.QRect(250, 270, 111, 25))
